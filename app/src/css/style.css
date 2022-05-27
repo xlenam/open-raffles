@@ -1,0 +1,50 @@
+body {
+    /*padding-top: 20px;
+    padding-left: 20%;
+    padding-right: 20%;*/
+}
+
+.bd-navbar {
+    padding: .75rem 0;
+    /*box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15),inset 0 -1px 0 rgba(0,0,0,0.15);*/
+    color: rgba(4, 17, 29, 0.75);
+}
+
+input {
+    display: inline;
+    margin-bottom: 12px;
+    width: 50px;
+}
+
+input.xl {
+    width: 350px;
+}
+
+.flexbox-container {
+    display: flex;
+}
+
+.box {
+    width: 30%;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #eee;
+    padding: 10px;
+}
+
+.separator {
+    height: 10px;
+}
+
+ul.list-inline li {
+    display: inline-block;
+    padding: 0 8px
+}
+
+.col-lg-3.col-md-4 {
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-bottom: 10px;
+}

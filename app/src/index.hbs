@@ -1,0 +1,192 @@
+{{#[helpers/layout] htmlWebpackPlugin}}
+
+    <!-- menu -->
+    <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true">Raffles
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+                    role="tab" aria-controls="profile" aria-selected="false">My raffles
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+                    role="tab" aria-controls="contact" aria-selected="false">Create Raffle
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link disabled" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin" type="button"
+                    role="tab"
+                    aria-controls="admin" aria-selected="false">Admin
+            </button>
+        </li>
+    </ul>
+
+    <!-- main -->
+    <div class="tab-content" id="myTabContent"
+         style="border: 1px solid rgba(0,0,0,.125); padding: 10px;margin-bottom: 10px;">
+        <!-- Raffles -->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="container">
+                <div class="row" id="raffles"></div>
+            </div>
+        </div>
+
+        <!-- My Raffles -->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="container">
+                <div class="row" id="my-raffles"></div>
+            </div>
+        </div>
+
+        <!-- Create Raffle -->
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa-solid fa-arrow-pointer"></i> Select the NFT you want to raffle:
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <label for="raffle-nft-contract-address" class="form-label">Contract
+                                        Address:</label>
+                                    <select class="form-select" id="raffle-nft-contract-address">
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="raffle-nft-id" class="form-label">Id to stake approve:</label>
+                                    <input class="form-control" type="text" id="raffle-nft-id" placeholder="e.g. 1234"/>
+                                </div>
+
+                                <button onclick="App.loadSelectedNFTInfo()" class="btn btn-primary">Load NFT info
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa-solid fa-cloud-arrow-down"></i> Approve token:
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2" id="selected-token-image">
+
+                                </div>
+                                <button onclick="App.approveNftTransfer()" class="btn btn-primary">Aprove</button>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Select the raffle details and create the
+                                raffle
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="raffle-price" class="form-label">Price (eth):</label>
+                                    <input class="form-control" type="text" id="raffle-price" placeholder="e.g. 0.1"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="raffle-supply" class="form-label">Supply:</label>
+                                    <input class="form-control" type="text" id="raffle-supply" placeholder="e.g. 100"/>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="raffle-duration" class="form-label">Period (days):</label>
+                                    <select class="form-select" id="raffle-duration">
+                                        <option selected>Choose...</option>
+                                        <option value="1">1 day</option>
+                                        <option value="3">3 days</option>
+                                        <option value="7">7 days</option>
+                                        <option value="30">1 month</option>
+                                    </select>
+                                </div>
+                                <button onclick="App.createRaffle()" class="btn btn-primary">Create raffle</button>
+                            </div>
+                        </div>
+                        <div class="p-3 mb-2 bg-warning text-dark">Warning: Once the raffle is created, the token will
+                            be locked in the
+                            raffle system.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin -->
+        <div class="tab-pane fade" id="admin" role="tabpanel" aria-labelledby="admin-tab">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <!-- admin contracts -->
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa-solid fa-ticket"></i> Authorized contracts
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="nftaddr" class="form-label">Contract address:</label>
+                                    <input class="form-control" type="text" id="nftaddr"
+                                           placeholder="e.g. 0x216c9aCb6893F290cEBD7E7FD1868fbdbEbffde4"/>
+                                    <button onclick="App.authorizeContract()" class="btn btn-primary">Authorize contract
+                                    </button>
+                                </div>
+                                <div class="mb-3">
+                                    <p id="status-admin"></p>
+                                </div>
+
+                                <!-- table -->
+                                <table id="contracts-table" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Symbol</th>
+                                        <th scope="col">Total Supply</th>
+                                        <th scope="col">Mint (test)</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- admin raffles -->
+                        <div class="card">
+                            <div class="card-header">
+                                <i class="fa-solid fa-ticket"></i> Raffles in progress
+                            </div>
+                            <div class="card-body">
+                                <!-- table -->
+                                <table id="raffles-table" class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Contract</th>
+                                        <th scope="col">Token</th>
+                                        <th scope="col">Tiquets</th>
+                                        <th scope="col">Max Tiquets</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+{{/[helpers/layout]}}

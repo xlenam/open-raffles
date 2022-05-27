@@ -1,0 +1,85 @@
+{{#[helpers/layout] htmlWebpackPlugin}}
+
+<!-- main -->
+<div style="border: 1px solid rgba(0,0,0,.125); padding: 10px;margin-bottom: 10px;">
+    <!-- buy ticket -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+            <a class="btn btn-outline-secondary btn-sm mb-2" href="/index.html" role="button"><i class="fa-solid fa-angle-left"></i> Back</a>
+            </div>
+            <!-- left card -->
+            <div class="col-lg-4 col-md-4">
+                <div class="card">
+                    <img id="image" src="..." class="card-img-top" alt="...">
+                    <div class="card-body text-left">
+                        <h5 id="token-id" class="card-title">Card title</h5>
+                        <p id="raffle-details" class="card-text"></p>
+                        <p id="raffle-winner" class="card-text"></p>
+                        <p id="raffle-owner" class="card-text"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- right form -->
+            <div class="col-lg-8 col-md-8">
+                <div class="mb-2" id="raffle-status">
+
+                </div>
+                <div class="mb-2">
+                    <label for="raffle-ticket-nft-contract-address" class="form-label">NFT Contract Address:</label>
+                    <input class="form-control" type="text" id="raffle-ticket-nft-contract-address" readonly/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="raffle-ticket-nft-id" class="form-label">Id of the NFT:</label>
+                    <input class="form-control" type="text" id="raffle-ticket-nft-id" readonly/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="raffle-ticket-num" class="form-label">Number of tickets:</label>
+                    <input onchange="App.calculatePrice()" class="form-control" type="text" id="raffle-ticket-num" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="raffle-ticket-unitprice" class="form-label">Unit price (eth):</label>
+                    <input class="form-control" type="text" id="raffle-ticket-unitprice" readonly/>
+                </div>
+
+                <div class="mb-3">
+                    <label for="raffle-ticket-price" class="form-label">Price (eth):</label>
+                    <input class="form-control" type="text" id="raffle-ticket-price" readonly/>
+                </div>
+
+                <div class="d-grid gap-2" id="raffle-buy-ticket-button">
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-ticket"></i> Tiquets
+                    </div>
+                    <div class="card-body">
+                        <table id="tickets-table" class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Address</th>
+                                <th scope="col">Num Tickets</th>
+                                <th scope="col">Is Winner</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{{/[helpers/layout]}}
